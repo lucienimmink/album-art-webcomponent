@@ -1,4 +1,4 @@
-import { getMetaInfo } from "./../../metainfo";
+import { getMetaInfo } from "./../metainfo";
 
 const fetchArt = async ({ artist, album }) => {
   const json = await getMetaInfo({ artist, album });

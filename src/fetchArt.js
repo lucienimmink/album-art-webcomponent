@@ -1,4 +1,4 @@
-import { getMetaInfo } from "./metainfo";
+import { getMetaInfo } from "./provider/metainfo";
 import { fetchArt as fanart } from "./provider/artist/fanart";
 import { fetchArt as audiodb } from "./provider/artist/audiodb";
 import { fetchArt as lastfm } from "./provider/album/lastfm";
