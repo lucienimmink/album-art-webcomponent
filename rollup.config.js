@@ -1,12 +1,13 @@
 import resolve from "rollup-plugin-node-resolve";
 import babel from "rollup-plugin-babel";
+import { terser } from "rollup-plugin-terser";
 
 export default {
   input: ["src/album-art.js"],
   output: {
     file: "build/album-art.js",
-    format: "es",
+    format: "esm",
     sourcemap: true,
   },
-  plugins: [resolve(), babel()],
+  plugins: [resolve(), babel(), terser()],
 };
