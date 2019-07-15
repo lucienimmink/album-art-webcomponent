@@ -1,5 +1,5 @@
 import { LitElement, html, css } from "lit-element";
-import { get, set } from "idb-keyval";
+import { Store, get, set } from "idb-keyval";
 import { fetchArtForArtist, fetchArtForAlbum } from "./fetchArt";
 import { defaultArt } from "./defaultart";
 
@@ -10,6 +10,7 @@ class AlbumArt extends LitElement {
       album: { type: String },
       art: { type: String },
       cache: { type: Boolean },
+      customStore: { type: Object }
     };
   }
   static get styles() {
@@ -24,6 +25,7 @@ class AlbumArt extends LitElement {
   constructor() {
     super();
     this.art = defaultArt;
+    this.customStore = new Store("album-art-db", "album-art-store");
   }
   render() {
     return html`
@@ -52,21 +54,21 @@ class AlbumArt extends LitElement {
   }
   async getArt({ artist, album }) {
     if (!album) {
-      return await get(`art-${artist}`);
+      return await get(`${artist}`, this.customStore);
     }
-    return await get(`art-${artist}-${album}`);
+    return await get(`${artist}-${album}`, this.customStore);
   }
   async updateArt({ artist, album }) {
     let art = "";
     if (!album) {
       art = await fetchArtForArtist(this.artist);
       if (this.cache && art) {
-        set(`art-${artist}`, art);
+        set(`${artist}`, art, this.customStore);
       }
     } else {
       art = await fetchArtForAlbum({ artist, album });
       if (this.cache && art) {
-        set(`art-${artist}-${album}`, art);
+        set(`${artist}-${album}`, art, this.customStore);
       }
     }
     this.art = art || defaultArt;

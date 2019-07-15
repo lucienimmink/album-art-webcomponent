@@ -10,6 +10,10 @@
     "start": "serve build"
   },
   "author": "Lucien Immink <lucien@arielext.org>",
+  "repository": {
+    "type": "GIT",
+    "url": "https://github.com/lucienimmink/album-art-webcomponent"
+  },
   "license": "MIT",
   "dependencies": {
     "idb-keyval": "^3.2.0",
