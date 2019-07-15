@@ -9,15 +9,15 @@ class AlbumArt extends LitElement {
       artist: { type: String },
       album: { type: String },
       art: { type: String },
+      cache: { type: Boolean },
     };
   }
   static get styles() {
     return css`
-      div {
+      img {
         width: 100%;
         height: 100%;
-        background-size: cover;
-        background-position: center center;
+        object-fit: cover;
       }
     `;
   }
@@ -27,12 +27,13 @@ class AlbumArt extends LitElement {
   }
   render() {
     return html`
-      <style>
-        div {
-          background-image: url(${this.art});
-        }
-      </style>
-      <div></div>
+      ${this.album
+        ? html`
+            <img src="${this.art}" alt="${this.artist} - ${this.album}" />
+          `
+        : html`
+            <img src="${this.art}" alt="${this.artist}" />
+          `}
     `;
   }
   async connectedCallback() {
@@ -42,8 +43,8 @@ class AlbumArt extends LitElement {
     }
     const key = { artist: this.artist, album: this.album };
     const cache = await this.getArt(key);
-    if (cache) {
-      console.log("cached lookup", cache);
+    this.cache = !(this.getAttribute("cache") === "false");
+    if (this.cache && cache) {
       this.art = cache;
     } else {
       this.updateArt(key);
@@ -56,19 +57,19 @@ class AlbumArt extends LitElement {
     return await get(`art-${artist}-${album}`);
   }
   async updateArt({ artist, album }) {
+    let art = "";
     if (!album) {
-      const art = await fetchArtForArtist(this.artist);
-      if (art) {
+      art = await fetchArtForArtist(this.artist);
+      if (this.cache && art) {
         set(`art-${artist}`, art);
       }
-      this.art = art || defaultArt;
     } else {
-      const art = await fetchArtForAlbum({ artist, album });
-      if (art) {
+      art = await fetchArtForAlbum({ artist, album });
+      if (this.cache && art) {
         set(`art-${artist}-${album}`, art);
       }
-      this.art = art || defaultArt;
     }
+    this.art = art || defaultArt;
     this.requestUpdate();
   }
 }
