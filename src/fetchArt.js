@@ -1,28 +1,22 @@
 import { getMetaInfo } from "./provider/metainfo";
-import { fetchArt as fanart } from "./provider/artist/fanart";
-import { fetchArt as audiodb } from "./provider/artist/audiodb";
-import { fetchArt as lastfm } from "./provider/album/lastfm";
+import { populate } from "./provider/populate";
+import { config as albumConfig } from "./provider/album/config";
+import { config as artistConfig } from "./provider/artist/config";
+import { some } from "./utils/reducers";
 
 const fetchArtForArtist = async artist => {
   const json = await getMetaInfo({ artist });
   const {
     artist: { mbid }
   } = json;
-
-  const urls = await Promise.all([
-    fanart(mbid).catch(error => {
-      return null;
-    }),
-    audiodb(artist).catch(error => {
-      return null;
-    })
-  ]);
-  return urls.reduce(
-    (accumulator, currentValue) => accumulator || currentValue
-  );
+  const id = { mbid, artist };
+  const urls = await Promise.all(populate(id, artistConfig));
+  return urls.reduce(some);
 };
 const fetchArtForAlbum = async ({ artist, album }) => {
-  return await lastfm({ artist, album });
+  const id = { artist, album };
+  const urls = await Promise.all(populate(id, albumConfig));
+  return urls.reduce(some);
 };
 
 export { fetchArtForArtist, fetchArtForAlbum };
