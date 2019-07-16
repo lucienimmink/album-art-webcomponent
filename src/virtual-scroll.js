@@ -9,7 +9,7 @@ class VirtualScroll extends LitElement {
       screenItemsLength: { type: Number, reflect: true },
       maxBuffer: { type: Number, reflect: true },
       cachedItemLength: { type: Number, reflect: true },
-      total: { type: Number, reflect: true },
+      total: { type: Number, reflect: true }
     };
   }
   static get styles() {
@@ -40,17 +40,28 @@ class VirtualScroll extends LitElement {
   }
   render() {
     return html`
-      <div @scroll="${this.handleScroll}" style="height: ${this.height}px; overflow: auto; position: relative; padding: 0;">
+      <div
+        @scroll="${this.handleScroll}"
+        style="height: ${this
+          .height}px; overflow: auto; position: relative; padding: 0;"
+      >
         ${this.chunk}
-        <div style="height: ${this.post}px; opacity: 0; position: absolute; top 0; left: 0; width: 1px; height: ${this.total}px "></div>
+        <div
+          style="opacity: 0; position: absolute; top 0; left: 0; width: 1px; height: ${this
+            .total}px "
+        ></div>
       </div>
     `;
   }
   handleScroll(e) {
     const scrollTop = e.target.scrollTop; // Triggers reflow
-    if (!this.lastPaintY || Math.abs(scrollTop - this.lastPaintY) > this.maxBuffer) {
+    if (
+      !this.lastPaintY ||
+      Math.abs(scrollTop - this.lastPaintY) > this.maxBuffer
+    ) {
       // recalc
-      const first = parseInt(scrollTop / this.itemHeight) - this.screenItemsLength;
+      const first =
+        parseInt(scrollTop / this.itemHeight) - this.screenItemsLength;
       this.renderChunk(first < 0 ? 0 : first);
       this.lastPaintY = scrollTop;
     }
@@ -67,7 +78,11 @@ class VirtualScroll extends LitElement {
       ${chunk.map(
         (artist, index) =>
           html`
-            <album-art artist="${artist}" style="position: absolute; top: ${(first + index) * this.itemHeight}px"></album-art>
+            <album-art
+              artist="${artist}"
+              style="position: absolute; top: ${(first + index) *
+                this.itemHeight}px"
+            ></album-art>
           `
       )}
     `;

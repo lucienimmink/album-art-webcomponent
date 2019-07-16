@@ -11,6 +11,7 @@ class AlbumArt extends LitElement {
       art: { type: String },
       cache: { type: Boolean },
       customStore: { type: Object },
+      _cache: { type: Object }
     };
   }
   static get styles() {
@@ -28,6 +29,7 @@ class AlbumArt extends LitElement {
   constructor() {
     super();
     this.art = defaultArt;
+    this._cache = {};
     this.customStore = new Store("album-art-db", "album-art-store");
   }
   render() {
@@ -49,6 +51,10 @@ class AlbumArt extends LitElement {
       throw Error("You need to specify an artist");
     }
     const key = { artist: this.artist, album: this.album };
+    if (this._cache[`${this.artist}-${this.album}`]) {
+      this.art = this._cache[`${this.artist}-${this.album}`];
+      return;
+    }
     const cache = await this.getArt(key);
     this.cache = !(this.getAttribute("cache") === "false");
     if (this.cache && cache) {
@@ -60,12 +66,17 @@ class AlbumArt extends LitElement {
   updated(changedProperties) {
     changedProperties.forEach(async (oldValue, propName) => {
       if (propName === "artist") {
-        const key = { artist: this.artist, album: this.album };
-        const cache = await this.getArt(key);
-        if (this.cache && cache) {
-          this.art = cache;
+        if (this._cache[`${this.artist}-${this.album}`]) {
+          this.art = this._cache[`${this.artist}-${this.album}`];
+          return;
         } else {
-          this.updateArt(key);
+          const key = { artist: this.artist, album: this.album };
+          const cache = await this.getArt(key);
+          if (this.cache && cache) {
+            this.art = cache;
+          } else {
+            this.updateArt(key);
+          }
         }
       }
     });
@@ -80,11 +91,13 @@ class AlbumArt extends LitElement {
     let art = "";
     if (!album) {
       art = await fetchArtForArtist(this.artist);
+      this._cache[`${artist}-${album}`] = art;
       if (this.cache && art) {
         set(`${artist}`, art, this.customStore);
       }
     } else {
       art = await fetchArtForAlbum({ artist, album });
+      this._cache[`${artist}-${album}`] = art;
       if (this.cache && art) {
         set(`${artist}-${album}`, art, this.customStore);
       }
