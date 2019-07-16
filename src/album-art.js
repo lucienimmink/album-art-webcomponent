@@ -10,7 +10,7 @@ class AlbumArt extends LitElement {
       album: { type: String },
       art: { type: String },
       cache: { type: Boolean },
-      customStore: { type: Object }
+      customStore: { type: Object },
     };
   }
   static get styles() {
@@ -19,6 +19,9 @@ class AlbumArt extends LitElement {
         width: 100%;
         height: 100%;
         object-fit: cover;
+      }
+      p {
+        margin: 0;
       }
     `;
   }
@@ -32,9 +35,11 @@ class AlbumArt extends LitElement {
       ${this.album
         ? html`
             <img src="${this.art}" alt="${this.artist} - ${this.album}" />
+            <p>${this.artist} - ${this.album}</p>
           `
         : html`
             <img src="${this.art}" alt="${this.artist}" />
+            <p>${this.artist}</p>
           `}
     `;
   }
@@ -51,6 +56,19 @@ class AlbumArt extends LitElement {
     } else {
       this.updateArt(key);
     }
+  }
+  updated(changedProperties) {
+    changedProperties.forEach(async (oldValue, propName) => {
+      if (propName === "artist") {
+        const key = { artist: this.artist, album: this.album };
+        const cache = await this.getArt(key);
+        if (this.cache && cache) {
+          this.art = cache;
+        } else {
+          this.updateArt(key);
+        }
+      }
+    });
   }
   async getArt({ artist, album }) {
     if (!album) {

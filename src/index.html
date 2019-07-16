@@ -1,12 +1,13 @@
 <head>
   <script type="module" src="album-art.js"></script>
+  <script type="module" src="virtual-scroll.js"></script>
   <style>
     body {
       margin: 0;
       padding: 0;
     }
     album-art {
-      display: inline-block;
+      display: block;
       width: 200px;
       height: 200px;
       margin: 20px 0 0 20px;
@@ -15,9 +16,33 @@
   </style>
 </head>
 <body>
-  <album-art artist="Rag'n'Bone Man" cache="false"></album-art>
-  <album-art artist="the gathering" album="home"></album-art>
-  <album-art artist="muse" album="simulation theory"></album-art>
-  <album-art artist="xandria"></album-art>
-  <album-art artist="Crimfall"></album-art>
+  <virtual-scroll> </virtual-scroll>
+
+  <script>
+    document.querySelector("virtual-scroll").list = [
+      "The 11th Hour",
+      "30 Seconds to mars",
+      "The 3rd And The Mortal",
+      "Abba",
+      "Ace Of Base",
+      "Adele",
+      "Adrenaline Mob",
+      "After Forever",
+      "Agnes Obel",
+      "Agua de annique",
+      "Alestorm",
+      "Alice In Chains",
+      "All That Remains",
+      "Alter Bridge",
+      "Amadeus Awad",
+      "Amaranthe",
+      "Ambeon",
+      "Amberian Dawn",
+      "Amelie",
+      "Amorphis",
+      "Amplifier",
+      "Amy MacDonald",
+      "Anathema",
+    ];
+  </script>
 </body>
