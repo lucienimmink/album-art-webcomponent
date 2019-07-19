@@ -99,7 +99,7 @@ class AlbumArt extends LitElement {
         }
       }
     } else {
-      art = await fetchArtForAlbum({ artist, album });
+      art += await fetchArtForAlbum({ artist, album });
       if (art === `https://res.cloudinary.com/jsmusicdb-com/image/fetch/null`) art = null;
       if (art) {
         this._cache[`${artist}-${album}`] = art;
