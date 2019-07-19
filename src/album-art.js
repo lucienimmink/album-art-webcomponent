@@ -11,7 +11,7 @@ class AlbumArt extends LitElement {
       art: { type: String },
       cache: { type: Boolean },
       customStore: { type: Object },
-      _cache: { type: Object }
+      _cache: { type: Object },
     };
   }
   static get styles() {
@@ -88,18 +88,24 @@ class AlbumArt extends LitElement {
     return await get(`${artist}-${album}`, this.customStore);
   }
   async updateArt({ artist, album }) {
-    let art = "";
+    let art = `https://res.cloudinary.com/jsmusicdb-com/image/fetch/`;
     if (!album) {
-      art = await fetchArtForArtist(this.artist);
-      this._cache[`${artist}-${album}`] = art;
-      if (this.cache && art) {
-        set(`${artist}`, art, this.customStore);
+      art += await fetchArtForArtist(this.artist);
+      if (art === `https://res.cloudinary.com/jsmusicdb-com/image/fetch/null`) art = null;
+      if (art) {
+        this._cache[`${artist}-${album}`] = art;
+        if (this.cache) {
+          set(`${artist}`, art, this.customStore);
+        }
       }
     } else {
       art = await fetchArtForAlbum({ artist, album });
-      this._cache[`${artist}-${album}`] = art;
-      if (this.cache && art) {
-        set(`${artist}-${album}`, art, this.customStore);
+      if (art === `https://res.cloudinary.com/jsmusicdb-com/image/fetch/null`) art = null;
+      if (art) {
+        this._cache[`${artist}-${album}`] = art;
+        if (this.cache) {
+          set(`${artist}-${album}`, art, this.customStore);
+        }
       }
     }
     this.art = art || defaultArt;
