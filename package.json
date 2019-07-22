@@ -2,7 +2,8 @@
   "name": "album-art-component",
   "version": "1.0.0",
   "description": "A webcomponent that fetches album and artist art from different sources",
-  "main": "build/album-art.js",
+  "main": "src/album-art.js",
+  "module": "src/album-art.js",
   "scripts": {
     "copyindex": "cp src/index.html build",
     "copywc": "cp -r node_modules/@webcomponents/webcomponentsjs/bundles build && cp node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js build",
@@ -20,8 +21,8 @@
     "lit-element": "^2.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.4",
-    "@babel/plugin-proposal-class-properties": "^7.5.0",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-proposal-decorators": "^7.4.4",
     "@webcomponents/webcomponentsjs": "^2.2.10",
     "rollup": "^1.17.0",

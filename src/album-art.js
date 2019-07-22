@@ -37,11 +37,9 @@ class AlbumArt extends LitElement {
       ${this.album
         ? html`
             <img src="${this.art}" alt="${this.artist} - ${this.album}" />
-            <p>${this.artist} - ${this.album}</p>
           `
         : html`
             <img src="${this.art}" alt="${this.artist}" />
-            <p>${this.artist}</p>
           `}
     `;
   }
