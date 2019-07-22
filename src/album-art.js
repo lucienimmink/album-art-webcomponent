@@ -63,6 +63,7 @@ class AlbumArt extends LitElement {
   }
   updated(changedProperties) {
     changedProperties.forEach(async (oldValue, propName) => {
+      this.cache = !(this.getAttribute("cache") === "false");
       if (propName === "artist") {
         if (this._cache[`${this.artist}-${this.album}`]) {
           this.art = this._cache[`${this.artist}-${this.album}`];

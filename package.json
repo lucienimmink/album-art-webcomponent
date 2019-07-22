@@ -1,5 +1,5 @@
 {
-  "name": "album-art-component",
+  "name": "@lucienimmink/album-art-component",
   "version": "1.0.0",
   "description": "A webcomponent that fetches album and artist art from different sources",
   "main": "src/album-art.js",
