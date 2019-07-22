@@ -1,7 +1,7 @@
 import { LitElement, html, css } from "lit-element";
 import { Store, get, set } from "idb-keyval";
 import { fetchArtForArtist, fetchArtForAlbum } from "./fetchArt";
-import { defaultArt } from "./defaultart";
+import { defaultAlbum, defaultArtist, defaultPixel } from "./defaultart";
 
 class AlbumArt extends LitElement {
   static get properties() {
@@ -28,7 +28,7 @@ class AlbumArt extends LitElement {
   }
   constructor() {
     super();
-    this.art = defaultArt;
+    this.art = defaultPixel;
     this._cache = {};
     this.customStore = new Store("album-art-db", "album-art-store");
   }
@@ -79,6 +79,13 @@ class AlbumArt extends LitElement {
       }
     });
   }
+  isEmptyArt(art) {
+    const base = `https://res.cloudinary.com/jsmusicdb-com/image/fetch/`;
+    if (art === base || art === `${base}null`) {
+      return true;
+    }
+    return false;
+  }
   async getArt({ artist, album }) {
     if (!album) {
       return await get(`${artist}`, this.customStore);
@@ -89,24 +96,25 @@ class AlbumArt extends LitElement {
     let art = `https://res.cloudinary.com/jsmusicdb-com/image/fetch/`;
     if (!album) {
       art += await fetchArtForArtist(this.artist);
-      if (art === `https://res.cloudinary.com/jsmusicdb-com/image/fetch/null`) art = null;
+      if (this.isEmptyArt(art)) art = null;
       if (art) {
         this._cache[`${artist}-${album}`] = art;
         if (this.cache) {
           set(`${artist}`, art, this.customStore);
         }
       }
+      this.art = art || defaultArtist;
     } else {
       art += await fetchArtForAlbum({ artist, album });
-      if (art === `https://res.cloudinary.com/jsmusicdb-com/image/fetch/null`) art = null;
+      if (this.isEmptyArt(art)) art = null;
       if (art) {
         this._cache[`${artist}-${album}`] = art;
         if (this.cache) {
           set(`${artist}-${album}`, art, this.customStore);
         }
       }
+      this.art = art || defaultAlbum;
     }
-    this.art = art || defaultArt;
     this.requestUpdate();
   }
 }
