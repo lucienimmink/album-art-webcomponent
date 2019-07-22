@@ -46,7 +46,7 @@ class AlbumArt extends LitElement {
   async connectedCallback() {
     super.connectedCallback();
     if (!this.artist) {
-      throw Error("You need to specify an artist");
+      return;
     }
     const key = { artist: this.artist, album: this.album };
     if (this._cache[`${this.artist}-${this.album}`]) {
