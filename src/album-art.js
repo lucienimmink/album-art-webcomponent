@@ -12,6 +12,7 @@ class AlbumArt extends LitElement {
       cache: { type: Boolean },
       customStore: { type: Object },
       _cache: { type: Object },
+      objectFit: { type: String }
     };
   }
   static get styles() {
@@ -19,7 +20,6 @@ class AlbumArt extends LitElement {
       img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
       }
       p {
         margin: 0;
@@ -31,15 +31,24 @@ class AlbumArt extends LitElement {
     this.art = defaultPixel;
     this._cache = {};
     this.customStore = new Store("album-art-db", "album-art-store");
+    this.objectFit = "cover";
   }
   render() {
     return html`
       ${this.album
         ? html`
-            <img src="${this.art}" alt="${this.artist} - ${this.album}" />
+            <img
+              src="${this.art}"
+              alt="${this.artist} - ${this.album}"
+              style="object-fit: ${this.objectFit}"
+            />
           `
         : html`
-            <img src="${this.art}" alt="${this.artist}" />
+            <img
+              src="${this.art}"
+              alt="${this.artist}"
+              style="object-fit: ${this.objectFit}"
+            />
           `}
     `;
   }
