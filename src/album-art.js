@@ -76,14 +76,14 @@ class AlbumArt extends LitElement {
       if (propName === "artist") {
         if (this._cache[`${this.artist}-${this.album}`]) {
           this.art = this._cache[`${this.artist}-${this.album}`];
-          dispatch();
+          this.dispatch();
           return;
         } else {
           const key = { artist: this.artist, album: this.album };
           const cache = await this.getArt(key);
           if (this.cache && cache) {
             this.art = cache;
-            dispatch();
+            this.dispatch();
           } else {
             this.updateArt(key);
           }
@@ -127,7 +127,7 @@ class AlbumArt extends LitElement {
       }
       this.art = art || defaultAlbum;
     }
-    dispatch();
+    this.dispatch();
     this.requestUpdate();
   }
 }
