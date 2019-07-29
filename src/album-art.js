@@ -12,7 +12,7 @@ class AlbumArt extends LitElement {
       cache: { type: Boolean },
       customStore: { type: Object },
       _cache: { type: Object },
-      objectFit: { type: String }
+      objectFit: { type: String },
     };
   }
   static get styles() {
@@ -37,18 +37,10 @@ class AlbumArt extends LitElement {
     return html`
       ${this.album
         ? html`
-            <img
-              src="${this.art}"
-              alt="${this.artist} - ${this.album}"
-              style="object-fit: ${this.objectFit}"
-            />
+            <img src="${this.art}" alt="${this.artist} - ${this.album}" style="object-fit: ${this.objectFit}" />
           `
         : html`
-            <img
-              src="${this.art}"
-              alt="${this.artist}"
-              style="object-fit: ${this.objectFit}"
-            />
+            <img src="${this.art}" alt="${this.artist}" style="object-fit: ${this.objectFit}" />
           `}
     `;
   }
@@ -70,18 +62,28 @@ class AlbumArt extends LitElement {
       this.updateArt(key);
     }
   }
+  dispatch() {
+    const evt = new CustomEvent("art", {
+      detail: { art: this.art },
+      bubbles: true,
+      composed: true,
+    });
+    this.dispatchEvent(evt);
+  }
   updated(changedProperties) {
     changedProperties.forEach(async (oldValue, propName) => {
       this.cache = !(this.getAttribute("cache") === "false");
       if (propName === "artist") {
         if (this._cache[`${this.artist}-${this.album}`]) {
           this.art = this._cache[`${this.artist}-${this.album}`];
+          dispatch();
           return;
         } else {
           const key = { artist: this.artist, album: this.album };
           const cache = await this.getArt(key);
           if (this.cache && cache) {
             this.art = cache;
+            dispatch();
           } else {
             this.updateArt(key);
           }
@@ -125,6 +127,7 @@ class AlbumArt extends LitElement {
       }
       this.art = art || defaultAlbum;
     }
+    dispatch();
     this.requestUpdate();
   }
 }
