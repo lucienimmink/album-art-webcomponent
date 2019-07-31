@@ -107,8 +107,12 @@ class AlbumArt extends LitElement {
   async updateArt({ artist, album }) {
     let art = `https://res.cloudinary.com/jsmusicdb-com/image/fetch/`;
     if (!album) {
-      art += await fetchArtForArtist(this.artist);
-      if (this.isEmptyArt(art)) art = null;
+      try {
+        art += await fetchArtForArtist(this.artist);
+        if (this.isEmptyArt(art)) art = null;
+      } catch (e) {
+        art = null;
+      }
       if (art) {
         this._cache[`${artist}-${album}`] = art;
         if (this.cache) {
@@ -117,8 +121,12 @@ class AlbumArt extends LitElement {
       }
       this.art = art || defaultArtist;
     } else {
-      art += await fetchArtForAlbum({ artist, album });
-      if (this.isEmptyArt(art)) art = null;
+      try {
+        art += await fetchArtForAlbum({ artist, album });
+        if (this.isEmptyArt(art)) art = null;
+      } catch (e) {
+        art = null;
+      }
       if (art) {
         this._cache[`${artist}-${album}`] = art;
         if (this.cache) {
