@@ -8,7 +8,7 @@ const fetchArt = async artist => {
     const json = await response.json();
     const { artists } = json;
     if (artists) {
-      return artists[0].strArtistFanart || artists[0].strArtistThumb;
+      return artists[0].strArtistThumb || artists[0].strArtistFanart;
     }
   }
   throw Error("no art found in provider audiodb");
