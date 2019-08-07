@@ -12,7 +12,7 @@ class AlbumArt extends LitElement {
       cache: { type: Boolean },
       customStore: { type: Object },
       _cache: { type: Object },
-      objectFit: { type: String },
+      objectFit: { type: String }
     };
   }
   static get styles() {
@@ -37,10 +37,20 @@ class AlbumArt extends LitElement {
     return html`
       ${this.album
         ? html`
-            <img src="${this.art}" alt="${this.artist} - ${this.album}" style="object-fit: ${this.objectFit}" />
+            <img
+              src="${this.art}"
+              alt="${this.artist} - ${this.album}"
+              style="object-fit: ${this.objectFit}"
+              loading="lazy"
+            />
           `
         : html`
-            <img src="${this.art}" alt="${this.artist}" style="object-fit: ${this.objectFit}" />
+            <img
+              src="${this.art}"
+              alt="${this.artist}"
+              style="object-fit: ${this.objectFit}"
+              loading="lazy"
+            />
           `}
     `;
   }
@@ -66,7 +76,7 @@ class AlbumArt extends LitElement {
     const evt = new CustomEvent("art", {
       detail: { art: this.art },
       bubbles: true,
-      composed: true,
+      composed: true
     });
     this.dispatchEvent(evt);
   }
