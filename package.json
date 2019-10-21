@@ -9,7 +9,7 @@
     "copywc": "cp -r node_modules/@webcomponents/webcomponentsjs/bundles build && cp node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js build",
     "build": "rm -rf build && mkdir build && npm run copyindex && npm run copywc && rollup -c",
     "start": "serve build",
-    "postversion": "npm run build && npm publish && git push && git piush --tags"
+    "postversion": "npm run build && npm publish && git push && git push --tags"
   },
   "author": "Lucien Immink <lucien@arielext.org>",
   "repository": {
