@@ -8,7 +8,8 @@
     "copyindex": "cp src/index.html build",
     "copywc": "cp -r node_modules/@webcomponents/webcomponentsjs/bundles build && cp node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js build",
     "build": "rm -rf build && mkdir build && npm run copyindex && npm run copywc && rollup -c",
-    "start": "serve build"
+    "start": "serve build",
+    "postversion": "npm run build && npm publish && git push && git piush --tags"
   },
   "author": "Lucien Immink <lucien@arielext.org>",
   "repository": {
@@ -21,15 +22,15 @@
     "lit-element": "^2.2.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.5",
+    "@babel/core": "^7.6.4",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/plugin-proposal-decorators": "^7.4.4",
-    "@webcomponents/webcomponentsjs": "^2.2.10",
-    "rollup": "^1.20.3",
+    "@babel/plugin-proposal-decorators": "^7.6.0",
+    "@webcomponents/webcomponentsjs": "^2.3.0",
+    "rollup": "^1.25.1",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-terser": "^5.1.1",
-    "serve": "^11.1.0"
+    "rollup-plugin-terser": "^5.1.2",
+    "serve": "^11.2.0"
   },
   "bugs": {
     "url": "https://github.com/lucienimmink/album-art-webcomponent/issues"
