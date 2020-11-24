@@ -1,4 +1,4 @@
-const getMetaInfo = async ({ artist, album }) => {
+const getMetaInfo = async ({ artist, album } : { artist: string; album: string }) => {
   const searchParams = new URLSearchParams();
   searchParams.set("api_key", "956c1818ded606576d6941de5ff793a5");
   searchParams.set("artist", artist);

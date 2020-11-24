@@ -1,4 +1,4 @@
-const fetchArt = async artist => {
+const fetchArt = async (artist: string) => {
   const response = await fetch(
     `https://www.theaudiodb.com/api/v1/json/1/search.php?s=${encodeURIComponent(
       artist

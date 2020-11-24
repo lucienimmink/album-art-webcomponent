@@ -1,6 +1,6 @@
 const FANARTAPIKEY = "639fca5adcf955a19f9a04f8985e9ded";
 
-const fetchArt = async mbid => {
+const fetchArt = async (mbid: string) => {
   if (!mbid) {
     throw Error("Cannot search without a proper mbid");
   }
