@@ -2,13 +2,13 @@
   "name": "album-art-component",
   "version": "2.0.0",
   "description": "A webcomponent that fetches album and artist art from different sources",
-  "main": "src/album-art.js",
-  "module": "src/album-art.js",
+  "main": "src/album-art.ts",
+  "module": "src/album-art.ts",
   "scripts": {
     "copyindex": "cp src/index.html build",
     "copywc": "cp -r node_modules/@webcomponents/webcomponentsjs/bundles build && cp node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js build",
     "build": "rm -rf build && mkdir build && npm run copyindex && npm run copywc && tsc && rollup -c",
-    "start": "serve build",
+    "start": "tsc && serve build",
     "tsc:watch": "tsc --watch",
     "tsc:build": "tsc",
     "postversion": "npm run build && npm publish && git push && git push --tags"
