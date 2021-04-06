@@ -1,6 +1,6 @@
 {
   "name": "album-art-component",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "A webcomponent that fetches album and artist art from different sources",
   "main": "src/album-art.ts",
   "module": "src/album-art.ts",
