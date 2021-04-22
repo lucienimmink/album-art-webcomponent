@@ -1,6 +1,7 @@
 {
   "name": "@addasoft/album-art-component",
   "version": "3.0.0",
+  "private": false,
   "description": "A webcomponent that fetches album and artist art from different sources",
   "main": "src/album-art.ts",
   "module": "src/album-art.ts",
@@ -11,7 +12,7 @@
     "start": "tsc && serve build",
     "tsc:watch": "tsc --watch",
     "tsc:build": "tsc",
-    "postversion": "npm run build && npm publish && git push && git push --tags"
+    "postversion": "npm run build && npm publish --access public && git push && git push --tags"
   },
   "author": "Lucien Immink <lucien@arielext.org>",
   "repository": {
