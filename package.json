@@ -1,6 +1,6 @@
 {
   "name": "@addasoft/album-art-component",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "A webcomponent that fetches album and artist art from different sources",
   "main": "src/album-art.ts",
   "module": "src/album-art.ts",
