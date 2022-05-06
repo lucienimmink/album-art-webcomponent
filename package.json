@@ -21,8 +21,10 @@
   },
   "license": "MIT",
   "dependencies": {
-    "idb-keyval": "^5.0.4",
-    "lit-element": "^2.3.1"
+    "dotenv": "^16.0.0",
+    "idb-keyval": "^6.1.0",
+    "lit": "^2.2.3",
+    "rollup-plugin-dotenv": "^0.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.13.14",
@@ -33,7 +35,7 @@
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^7.0.0",
-    "serve": "^11.3.2",
+    "serve": "^13.0.2",
     "tslib": "^2.2.0",
     "typescript": "^4.2.3"
   },

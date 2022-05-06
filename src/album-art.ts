@@ -1,4 +1,5 @@
-import { LitElement, customElement, html, css } from 'lit-element';
+import { LitElement, html, css } from 'lit';
+import { customElement } from 'lit/decorators.js';
 import { createStore, get, set } from 'idb-keyval';
 import { fetchArtForArtist, fetchArtForAlbum } from './fetchArt';
 import { defaultAlbum, defaultArtist, defaultPixel } from './defaultart';
@@ -25,7 +26,6 @@ export class AlbumArt extends LitElement {
       _cache: { type: Object },
       objectFit: { type: String },
       transparent: { type: Boolean },
-      dimension: { type: Number },
     };
   }
   static get styles() {
@@ -35,6 +35,12 @@ export class AlbumArt extends LitElement {
         height: 100%;
         transition: all 0.2s ease-in-out;
         background: rgba(255, 255, 255, 0.85);
+      }
+      ::-moz-selection {
+        background-color: var(--primary);
+      }
+      ::selection {
+        background-color: var(--primary);
       }
       p {
         margin: 0;
@@ -59,9 +65,12 @@ export class AlbumArt extends LitElement {
     this.dimension = 300;
   }
   private getDimensions() {
+    /*
     this.dimension = Math.min(
       Math.max(this.offsetWidth, this.offsetHeight) || 300
     );
+    */
+    this.dimension = 300;
   }
   render() {
     return html`
@@ -189,7 +198,8 @@ export class AlbumArt extends LitElement {
       // let's resize those larger artist arts we get.
       art += `,w_${this.dimension},h_${this.dimension},c_fill/`;
       try {
-        art += await fetchArtForArtist(this.artist);
+        const remoteURL = await fetchArtForArtist(this.artist);
+        art += remoteURL;
         if (this.isEmptyArt(art)) art = '';
       } catch (e) {
         art = '';

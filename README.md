@@ -34,6 +34,15 @@ npm run build
 
 to build a new distribution build.
 
+## API keys
+
+Add the following to your local `.env` file in order to use last.fm and fanart
+
+```ruby
+LASTFM_APIKEY=[your key]
+LASTFM_SECRET=[your secret]
+FANART_APIKEY=[your key]
+
 ### Add a new provider
 
 TODO: the idea is that we, the community, can add new art providers which will be discovered during the build process and all of them will be used till a proper image is found. For now though, surprise me with a pull request
