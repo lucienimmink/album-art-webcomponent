@@ -12,7 +12,9 @@
     "start": "tsc && serve build",
     "tsc:watch": "tsc --watch",
     "tsc:build": "tsc",
-    "postversion": "npm run build && npm publish --access public && git push && git push --tags"
+    "postversion": "npm run build && npm publish --access public && git push && git push --tags",
+    "analyse": "custom-elements-manifest analyze --litelement --outdir build --globs \"src/**/*.ts\"",
+    "analyse:watch": "custom-elements-manifest analyze --litelement --outdir build --globs \"src/**/*.ts\" --watch"
   },
   "author": "Lucien Immink <lucien@arielext.org>",
   "repository": {
@@ -30,6 +32,7 @@
     "@babel/core": "^7.18.5",
     "@babel/plugin-proposal-class-properties": "^7.17.12",
     "@babel/plugin-proposal-decorators": "^7.18.2",
+    "@custom-elements-manifest/analyzer": "^0.6.3",
     "@webcomponents/webcomponentsjs": "^2.5.0",
     "rollup": "^2.75.7",
     "rollup-plugin-babel": "^4.4.0",

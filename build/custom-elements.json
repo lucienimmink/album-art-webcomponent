@@ -1,0 +1,668 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/album-art.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "AlbumArt",
+          "members": [
+            {
+              "kind": "field",
+              "name": "art",
+              "privacy": "public",
+              "type": {
+                "text": "any"
+              },
+              "default": "defaultPixel",
+              "attribute": "art"
+            },
+            {
+              "kind": "field",
+              "name": "_cache",
+              "privacy": "public",
+              "type": {
+                "text": "any"
+              },
+              "default": "{}",
+              "attribute": "_cache"
+            },
+            {
+              "kind": "field",
+              "name": "customStore",
+              "privacy": "public",
+              "type": {
+                "text": "any"
+              },
+              "attribute": "customStore"
+            },
+            {
+              "kind": "field",
+              "name": "objectFit",
+              "privacy": "public",
+              "type": {
+                "text": "string"
+              },
+              "default": "'cover'",
+              "attribute": "objectFit"
+            },
+            {
+              "kind": "field",
+              "name": "album",
+              "privacy": "public",
+              "type": {
+                "text": "any"
+              },
+              "attribute": "album"
+            },
+            {
+              "kind": "field",
+              "name": "artist",
+              "privacy": "public",
+              "type": {
+                "text": "any"
+              },
+              "attribute": "artist"
+            },
+            {
+              "kind": "field",
+              "name": "cache",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "cache"
+            },
+            {
+              "kind": "field",
+              "name": "transparent",
+              "privacy": "public",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "attribute": "transparent"
+            },
+            {
+              "kind": "field",
+              "name": "dimension",
+              "type": {
+                "text": "number"
+              },
+              "default": "300"
+            },
+            {
+              "kind": "field",
+              "name": "ARTBASE",
+              "default": "`https://res.cloudinary.com/jsmusicdb-com/image/fetch/f_auto`"
+            },
+            {
+              "kind": "method",
+              "name": "getDimensions",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "dispatch"
+            },
+            {
+              "kind": "method",
+              "name": "isEmptyArt",
+              "parameters": [
+                {
+                  "name": "art",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "getArt",
+              "parameters": [
+                {
+                  "name": "{\n    artist,\n    album,\n    dimension,\n  }",
+                  "type": {
+                    "text": "{\n    artist: string;\n    album: string;\n    dimension: number;\n  }"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "updateArt",
+              "parameters": [
+                {
+                  "name": "{ artist, album }",
+                  "type": {
+                    "text": "{ artist: string; album: string }"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "artist",
+              "type": {
+                "text": "any"
+              },
+              "fieldName": "artist"
+            },
+            {
+              "name": "album",
+              "type": {
+                "text": "any"
+              },
+              "fieldName": "album"
+            },
+            {
+              "name": "art",
+              "type": {
+                "text": "any"
+              },
+              "default": "defaultPixel",
+              "resolveInitializer": {
+                "module": "/src/defaultart"
+              },
+              "fieldName": "art"
+            },
+            {
+              "name": "cache",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "cache"
+            },
+            {
+              "name": "customStore",
+              "type": {
+                "text": "any"
+              },
+              "fieldName": "customStore"
+            },
+            {
+              "name": "_cache",
+              "type": {
+                "text": "any"
+              },
+              "default": "{}",
+              "fieldName": "_cache"
+            },
+            {
+              "name": "objectFit",
+              "type": {
+                "text": "string"
+              },
+              "default": "'cover'",
+              "fieldName": "objectFit"
+            },
+            {
+              "name": "transparent",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "fieldName": "transparent"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "album-art",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "AlbumArt",
+          "declaration": {
+            "name": "AlbumArt",
+            "module": "src/album-art.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "album-art",
+          "declaration": {
+            "name": "AlbumArt",
+            "module": "src/album-art.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/defaultart.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "defaultAlbum",
+          "default": "`data:image/svg+xml;base64,${btoa(cdSVG)}`"
+        },
+        {
+          "kind": "variable",
+          "name": "defaultArtist",
+          "default": "`data:image/svg+xml;base64,${btoa(peopleSVG)}`"
+        },
+        {
+          "kind": "variable",
+          "name": "defaultPixel",
+          "default": "`data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAANSURBVBhXY/j//z8DAAj8Av6IXwbgAAAAAElFTkSuQmCC`"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "defaultAlbum",
+          "declaration": {
+            "name": "defaultAlbum",
+            "module": "src/defaultart.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "defaultArtist",
+          "declaration": {
+            "name": "defaultArtist",
+            "module": "src/defaultart.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "defaultPixel",
+          "declaration": {
+            "name": "defaultPixel",
+            "module": "src/defaultart.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/fetchArt.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "fetchArtForArtist",
+          "parameters": [
+            {
+              "name": "artist",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "fetchArtForAlbum",
+          "parameters": [
+            {
+              "name": "{\n  artist,\n  album,\n}",
+              "type": {
+                "text": "{\n  artist: string;\n  album: string;\n}"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "fetchArtForArtist",
+          "declaration": {
+            "name": "fetchArtForArtist",
+            "module": "src/fetchArt.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "fetchArtForAlbum",
+          "declaration": {
+            "name": "fetchArtForAlbum",
+            "module": "src/fetchArt.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/icons/cd.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "cdIcon",
+          "default": "html`${svg}`"
+        },
+        {
+          "kind": "variable",
+          "name": "cdSVG",
+          "default": "svg"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "cdIcon",
+          "declaration": {
+            "name": "cdIcon",
+            "module": "src/icons/cd.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "cdSVG",
+          "declaration": {
+            "name": "cdSVG",
+            "module": "src/icons/cd.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/icons/people.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "peopleIcon",
+          "default": "html`${svg}`"
+        },
+        {
+          "kind": "variable",
+          "name": "peopleSVG",
+          "default": "svg"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "peopleIcon",
+          "declaration": {
+            "name": "peopleIcon",
+            "module": "src/icons/people.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "peopleSVG",
+          "declaration": {
+            "name": "peopleSVG",
+            "module": "src/icons/people.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/provider/metainfo.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "LASTFMAPIKEY",
+          "default": "process.env.LASTFM_APIKEY!"
+        },
+        {
+          "kind": "function",
+          "name": "getMetaInfo",
+          "parameters": [
+            {
+              "name": "{\n  artist,\n  album,\n}",
+              "type": {
+                "text": "{\n  artist: string;\n  album: string;\n}"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "getMBID",
+          "parameters": [
+            {
+              "name": "artist",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "LASTFMAPIKEY",
+          "declaration": {
+            "name": "LASTFMAPIKEY",
+            "module": "src/provider/metainfo.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "getMetaInfo",
+          "declaration": {
+            "name": "getMetaInfo",
+            "module": "src/provider/metainfo.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "getMBID",
+          "declaration": {
+            "name": "getMBID",
+            "module": "src/provider/metainfo.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/provider/populate.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "populate",
+          "parameters": [
+            {
+              "name": "id",
+              "type": {
+                "text": "{ [x: string]: any; mbid?: any; artist?: any; album?: any }"
+              }
+            },
+            {
+              "name": "config",
+              "type": {
+                "text": "any[]"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "populate",
+          "declaration": {
+            "name": "populate",
+            "module": "src/provider/populate.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/utils/reducers.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "some",
+          "parameters": [
+            {
+              "name": "accumulator",
+              "type": {
+                "text": "any"
+              }
+            },
+            {
+              "name": "currentValue",
+              "type": {
+                "text": "any"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "some",
+          "declaration": {
+            "name": "some",
+            "module": "src/utils/reducers.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/provider/album/config.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "config",
+          "type": {
+            "text": "array"
+          },
+          "default": "[\n  {\n    provider: lastfm,\n  },\n]"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "config",
+          "declaration": {
+            "name": "config",
+            "module": "src/provider/album/config.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/provider/album/lastfm.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "fetchArt",
+          "parameters": [
+            {
+              "name": "{\n  artist,\n  album,\n}",
+              "type": {
+                "text": "{\n  artist: string;\n  album: string;\n}"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "fetchArt",
+          "declaration": {
+            "name": "fetchArt",
+            "module": "src/provider/album/lastfm.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/provider/artist/audiodb.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "fetchArt",
+          "parameters": [
+            {
+              "name": "artist",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "fetchArt",
+          "declaration": {
+            "name": "fetchArt",
+            "module": "src/provider/artist/audiodb.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/provider/artist/config.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "config",
+          "type": {
+            "text": "array"
+          },
+          "default": "[\n  {\n    provider: fanart,\n    key: 'mbid',\n  },\n  {\n    provider: audiodb,\n    key: 'artist',\n  },\n]"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "config",
+          "declaration": {
+            "name": "config",
+            "module": "src/provider/artist/config.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/provider/artist/fanart.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "fetchArt",
+          "parameters": [
+            {
+              "name": "mbid",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "fetchArt",
+          "declaration": {
+            "name": "fetchArt",
+            "module": "src/provider/artist/fanart.ts"
+          }
+        }
+      ]
+    }
+  ]
+}
