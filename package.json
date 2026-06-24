@@ -31,7 +31,7 @@
   "devDependencies": {
     "@babel/core": "^7.18.5",
     "@babel/plugin-proposal-class-properties": "^7.17.12",
-    "@babel/plugin-proposal-decorators": "^7.18.2",
+    "@babel/plugin-proposal-decorators": "^8.0.0",
     "@custom-elements-manifest/analyzer": "^0.6.3",
     "@webcomponents/webcomponentsjs": "^2.5.0",
     "rollup": "^3.0.0",
